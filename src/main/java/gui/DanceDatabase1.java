@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package dancedatabase1;
+package gui;
 
 /**
  *
@@ -12,13 +12,14 @@ package dancedatabase1;
  */
 public class DanceDatabase1 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        j1 j =new j1();
-      j.setVisible(true);
-    }
-    
+	/**
+	 * @param args
+	 *            the command line arguments
+	 */
+	public static void main(String[] args) {
+		// TODO code application logic here
+		j1 j = new j1();
+		j.setVisible(true);
+	}
+
 }

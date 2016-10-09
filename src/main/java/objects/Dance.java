@@ -10,7 +10,7 @@ import java.util.Date;
  *
  */
 public class Dance {
-	
+
 	/**
 	 * @param id
 	 * @param type_id
@@ -38,7 +38,7 @@ public class Dance {
 			int progression_id, int steps_verified, int tunes_verified, int medley_type_id, int bars_per_repeat,
 			int intensity_per_turn, int formations_verified, Date created, Date devised, Date last_modified,
 			String name, String notes, String ucname, String intensity_bars) {
-//		super();
+		// super();
 		this.id = id;
 		this.type_id = type_id;
 		this.intensity = intensity;
@@ -76,16 +76,15 @@ public class Dance {
 	private int bars_per_repeat;
 	private int intensity_per_turn;
 	private int formations_verified;
-	
+
 	private Date created;
 	private Date devised;
 	private Date last_modified;
-	
+
 	private String name;
 	private String notes;
 	private String ucname;
 	private String intensity_bars;
-	
 
 	public int getId() {
 		return id;
@@ -254,5 +253,5 @@ public class Dance {
 	public void setIntensity_per_turn(int intensity_per_turn) {
 		this.intensity_per_turn = intensity_per_turn;
 	}
-	
+
 }
