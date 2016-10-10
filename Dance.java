@@ -34,10 +34,15 @@ public class Dance {
 	 * @param ucname
 	 * @param intensity_bars
 	 */
-	public Dance(int id, int type_id, int intensity, int shape_id, int couples_id, int devisor_id, int data_verified,
+	/*public Dance(int id, int type_id, int intensity, int shape_id, int couples_id, int devisor_id, int data_verified,
 			int progression_id, int steps_verified, int tunes_verified, int medley_type_id, int bars_per_repeat,
 			int intensity_per_turn, int formations_verified, Date created, Date devised, Date last_modified,
-			String name, String notes, String ucname, String intensity_bars) {
+			String name, String notes, String ucname, String intensity_bars)*/ 
+	public Dance(int id, int type_id, int intensity, int shape_id, int couples_id, int devisor_id, int data_verified,
+			int progression_id, int steps_verified, int tunes_verified, int medley_type_id, int bars_per_repeat,
+			int intensity_per_turn, int formations_verified,
+			String name, String notes, String ucname, String intensity_bars)
+	{
 //		super();
 		this.id = id;
 		this.type_id = type_id;
@@ -53,9 +58,9 @@ public class Dance {
 		this.bars_per_repeat = bars_per_repeat;
 		this.intensity_per_turn = intensity_per_turn;
 		this.formations_verified = formations_verified;
-		this.created = created;
-		this.devised = devised;
-		this.last_modified = last_modified;
+	//	this.created = created;
+	//	this.devised = devised;
+	//	this.last_modified = last_modified;
 		this.name = name;
 		this.notes = notes;
 		this.ucname = ucname;
@@ -77,9 +82,9 @@ public class Dance {
 	private int intensity_per_turn;
 	private int formations_verified;
 	
-	private Date created;
-	private Date devised;
-	private Date last_modified;
+	//private Date created;
+	//private Date devised;
+	//private Date last_modified;
 	
 	private String name;
 	private String notes;
@@ -95,7 +100,7 @@ public class Dance {
 		this.id = id;
 	}
 
-	public Date getCreated() {
+	/*public Date getCreated() {
 		return created;
 	}
 
@@ -110,7 +115,7 @@ public class Dance {
 	public void setLast_modified(Date last_modified) {
 		this.last_modified = last_modified;
 	}
-
+*/
 	public String getName() {
 		return name;
 	}
@@ -183,14 +188,14 @@ public class Dance {
 		this.devisor_id = devisor_id;
 	}
 
-	public Date getDevised() {
+/*	public Date getDevised() {
 		return devised;
 	}
 
 	public void setDevised(Date devised) {
 		this.devised = devised;
 	}
-
+*/
 	public String getNotes() {
 		return notes;
 	}
