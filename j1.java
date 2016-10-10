@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 public class j1 extends JFrame {
 
+	private String input;
     public j1() {
         initComponents();
        
@@ -102,7 +103,13 @@ public class j1 extends JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String input = jTextField1.getText();
+        input = jTextField1.getText();
+	    
+	    /*
+	    SqlConnection con;
+	    SqlQuery fkd = new SqlQuery(con,"Dance);
+	    List<Dances> dances = fkd.searchByname(input);
+	    */
          //add(l);
            if(input == null ? "" == null : input.equals(""))
            {
