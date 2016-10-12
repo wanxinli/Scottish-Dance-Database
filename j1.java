@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 public class j1 extends JFrame {
 
-	private String input;
+    public String input;
     public j1() {
         initComponents();
        
