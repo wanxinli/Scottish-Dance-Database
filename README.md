@@ -1,2 +1,3 @@
 # cisc475-DanceDB
 Project repo for Advanced Software Engineering
+It an application for Scotich Dance. scddata.db is the database. There are 4 pakcges having files written in Java. Object package is for all category in the database such as Dance, Recording, and Album. GUI is for classes implement the user interface. Database is for classes connect to database and make query. Main has the main method.
