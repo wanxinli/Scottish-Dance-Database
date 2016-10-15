@@ -25,6 +25,8 @@ public class SqlQuery
 	public List<Dance> searchByName(String searchKey){
 		Statement statement;
 		List<Dance> dances = new ArrayList<Dance>();
+		if(!table.equals("dance"))
+			return dances;
 		try {
 			statement = connection.createStatement();
 			statement.setQueryTimeout(30);  
