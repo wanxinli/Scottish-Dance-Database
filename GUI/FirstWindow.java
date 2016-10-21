@@ -19,7 +19,7 @@ public class FirstWindow extends JFrame implements ActionListener {
 	    add(label);
 	    textField = new TextField(30);
 	    add(textField);
-	    textField.addActionListener(this);
+	 //   textField.addActionListener(this);  /*not need*/
 	    button = new Button("Search");
 	    add(button);     
 	    button.addActionListener(this);
