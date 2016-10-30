@@ -1,4 +1,7 @@
 package GUI;
+/*
+ * Written By Taghreed Bagies
+ */	
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,11 +10,21 @@ import javax.swing.JFrame;
 
 import Main.MainClass;
 
+/**
+ * 
+ * @author tbagies
+ *
+ */
 public class FirstWindow extends JFrame implements ActionListener {
+	/**
+	 * Data Fields
+	 */
 	 private Button button;
 	 private Label label;
 	 private TextField textField;
-	    
+	/**
+	 * Constructor    
+	 */
 	public FirstWindow(){
 		setLayout(new FlowLayout());
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -19,7 +32,7 @@ public class FirstWindow extends JFrame implements ActionListener {
 	    add(label);
 	    textField = new TextField(30);
 	    add(textField);
-	 //   textField.addActionListener(this);  /*not need*/
+	    textField.addActionListener(this);
 	    button = new Button("Search");
 	    add(button);     
 	    button.addActionListener(this);
@@ -29,7 +42,10 @@ public class FirstWindow extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	/**
+	 * @param actionevent 
+	 */
+	public void actionPerformed(ActionEvent actionevent) {
 		MainClass.run(textField.getText());
 	}
 }
