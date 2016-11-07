@@ -4,7 +4,7 @@ public abstract class CategoryObj {
 	public abstract int getId() ;
 
 	public  abstract void setId(int id) ;
-	public  abstract int getproductionyear() ;
+	public  abstract int getproductionyear();
 	public  abstract void setproductionyear(int productionyear);
 	
 	public  abstract int getartist_id() ;
