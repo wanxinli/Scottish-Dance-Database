@@ -14,9 +14,9 @@ public class Album extends CategoryObj {
 	private int productionyearValue;
 	private String nameValue;
 	private int artist_idValue;
-	public static final String [] columns = {"id","name","productionyear", "artist_id"};
+	//public static final String [] columns = {"id","name","productionyear", "artist_id"};
 	
-	public Album(){}
+	//public Album(){}
 	
 	public int getId() {
 		return idValue;
