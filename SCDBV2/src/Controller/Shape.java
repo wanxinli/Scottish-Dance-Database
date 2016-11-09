@@ -16,6 +16,8 @@ public class Shape extends CategoryObj{
 	private int id;
 	private String name;
 	private String short_name;
+	
+	public static final String[] columns = { "id", "name", "short_name"};
 
 	public Shape(int id, String name, String short_name) {
 		this.id = id;
