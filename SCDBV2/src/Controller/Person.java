@@ -18,6 +18,8 @@ public class Person extends CategoryObj {
 	private String loctaion;
 	private int byear; // birth year
 	private int dyear; // dead year
+	
+	public static final String[] columns = { "id", "name", "location", "byear", "dyear" };
 
 	public Person(int id, String name, String loctaion, int byear, int dyear) {
 		super();
