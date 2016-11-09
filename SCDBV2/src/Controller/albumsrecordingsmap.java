@@ -61,11 +61,11 @@ public class albumsrecordingsmap extends CategoryObj{
 		
 	}
 	
-	public static List<albumsrecordingsmap> searchByKey(int searcKey)
+	public static List<albumsrecordingsmap> searchByKey(String searcKey)
 	{
 		SqlConnection con = new SqlConnection();
 		SqlQuery query = new SqlQuery(con.getConnection(),"albumsrecordingsmap");
-		ResultSet results = query.searchByID("id", searcKey);
+		ResultSet results = query.searchByName("name", searcKey);
 		List<albumsrecordingsmap> albumsrecordingsmaps = new ArrayList<albumsrecordingsmap>();
 		try {
 			while(results.next()){
