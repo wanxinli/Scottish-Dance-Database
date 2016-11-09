@@ -8,6 +8,11 @@ import java.util.List;
 import Model.SqlConnection;
 import Model.SqlQuery;
 
+/**
+ * 
+ * @author Wanxin Li
+ *
+ */
 public class DanceType extends CategoryObj {
 	private int id;
 	private String name;
