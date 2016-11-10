@@ -7,9 +7,9 @@ import Model.SqlConnection;
 import Model.SqlQuery;
 
 
-public class albumsrecordingsmap extends CategoryObj{
+public class AlbumsRecordingsMap extends CategoryObj{
 
-	public albumsrecordingsmap() {
+	public AlbumsRecordingsMap() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -53,7 +53,7 @@ public class albumsrecordingsmap extends CategoryObj{
 	}
 	
 	
-	public albumsrecordingsmap(int id, int recording_id, int album_id, int tracknumber) {
+	public AlbumsRecordingsMap(int id, int recording_id, int album_id, int tracknumber) {
 		this.idValue2 = id;
 		this.album_idValue2 = album_id;
 		this.recording_idValue = recording_id;
@@ -61,15 +61,15 @@ public class albumsrecordingsmap extends CategoryObj{
 		
 	}
 	
-	public static List<albumsrecordingsmap> searchByKey(String searcKey)
+	public static List<AlbumsRecordingsMap> searchByKey(String searcKey)
 	{
 		SqlConnection con = new SqlConnection();
 		SqlQuery query = new SqlQuery(con.getConnection(),"albumsrecordingsmap");
 		ResultSet results = query.searchByName("name", searcKey);
-		List<albumsrecordingsmap> albumsrecordingsmaps = new ArrayList<albumsrecordingsmap>();
+		List<AlbumsRecordingsMap> albumsrecordingsmaps = new ArrayList<AlbumsRecordingsMap>();
 		try {
 			while(results.next()){
-				albumsrecordingsmap albumsrecordingsmap1 = new albumsrecordingsmap(results.getInt("id"), results.getInt("album_id"),results.getInt("recording_id"), results.getInt("tracknumber"));
+				AlbumsRecordingsMap albumsrecordingsmap1 = new AlbumsRecordingsMap(results.getInt("id"), results.getInt("album_id"),results.getInt("recording_id"), results.getInt("tracknumber"));
 				albumsrecordingsmaps.add(albumsrecordingsmap1);
 			}
 		} catch (SQLException e) {
