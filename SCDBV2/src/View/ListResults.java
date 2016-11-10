@@ -50,6 +50,13 @@ public class ListResults extends JPanel{
 				break;
 			case "dance":
 				//setupTable();
+			        List<Dance> dances = Dance.searchByKey(searchKey);
+			        if (dances.isEmpty()) {
+				        errorMessage("There is no data matches the input ");
+			        } else {
+				        danceTable(dances);
+				        setupTable();
+			        }
 				break;
 			default:
 			
@@ -109,6 +116,27 @@ public class ListResults extends JPanel{
 			data[i][3] = albums.get(i).getproductionyear();
 		}
 		model = createModel(data,Album.columns);
+	}
+	
+		private void danceTable(List<Dance> dances) {
+		Object[][] data = new Object[dances.size()][Dance.columns.length];
+		for (int i = 0; i < dances.size(); i++) {
+			data[i][0] = dances.get(i).getId();
+			data[i][1] = dances.get(i).getName();
+			data[i][2] = dances.get(i).getType_id();
+			data[i][3] = dances.get(i).getShape_id();
+			data[i][4] = dances.get(i).getDevisor_id();
+
+			List<DanceType> dancetypes = DanceType.searchByKey(data[i][2].toString());
+			data[i][2] = dancetypes.get(0).getName();
+
+			List<Shape> shapes = Shape.searchByKey(data[i][3].toString());
+			data[i][3] = shapes.get(0).getName();
+
+			List<Person> persons = Person.searchByKey(data[i][4].toString());
+			data[i][4] = persons.get(0).getName();
+		}
+		model = createModel(data, Dance.columns);
 	}
 	
 	public String getCategory() {
