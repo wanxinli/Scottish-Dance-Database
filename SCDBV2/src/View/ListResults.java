@@ -118,7 +118,7 @@ public class ListResults extends JPanel{
 		model = createModel(data,Album.columns);
 	}
 	
-		private void danceTable(List<Dance> dances) {
+	private void danceTable(List<Dance> dances) {
 		Object[][] data = new Object[dances.size()][Dance.columns.length];
 		for (int i = 0; i < dances.size(); i++) {
 			data[i][0] = dances.get(i).getId();
