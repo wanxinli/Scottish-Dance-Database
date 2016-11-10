@@ -128,10 +128,10 @@ public class ListResults extends JPanel{
 			data[i][4] = dances.get(i).getDevisor_id();
 
 			List<DanceType> dancetypes = DanceType.searchByKey(data[i][2].toString());
-			data[i][2] = dancetypes.get(0).getName();
+			data[i][2] = dancetypes.get(0).getShort_name();
 
 			List<Shape> shapes = Shape.searchByKey(data[i][3].toString());
-			data[i][3] = shapes.get(0).getName();
+			data[i][3] = shapes.get(0).getShort_name();
 
 			List<Person> persons = Person.searchByKey(data[i][4].toString());
 			data[i][4] = persons.get(0).getName();
