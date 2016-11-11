@@ -16,6 +16,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.Album;
+import Controller.Dance;
+import Controller.DanceType;
+import Controller.Person;
+import Controller.Record;
+import Controller.Shape;
 
 
 public class ListResults extends JPanel{
@@ -30,11 +35,19 @@ public class ListResults extends JPanel{
 	JScrollPane spTable;
 	private DefaultTableModel model;
 	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 	public ListResults(String category,String userInput){
 		this.category = category;
 		searchKey = userInput;
 		display();
 	}
+	
 	public void display(){
 
 		switch(category){
@@ -58,6 +71,14 @@ public class ListResults extends JPanel{
 				        setupTable();
 			        }
 				break;
+			case "record":
+				List<Record> records = Record.searchByKey(searchKey);
+				if (records.isEmpty()){
+					errorMessage("No Results Found");
+				} else {
+					recordTable(records);
+					setupTable();
+				}
 			default:
 			
 		}
@@ -119,7 +140,7 @@ public class ListResults extends JPanel{
 	}
 	
 	private void danceTable(List<Dance> dances) {
-		Object[][] data = new Object[dances.size()][Dance.columns.length];
+		Object [][] data = new Object[dances.size()][Dance.columns.length];
 		for (int i = 0; i < dances.size(); i++) {
 			data[i][0] = dances.get(i).getId();
 			data[i][1] = dances.get(i).getName();
@@ -138,12 +159,21 @@ public class ListResults extends JPanel{
 		}
 		model = createModel(data, Dance.columns);
 	}
-	
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
+
+	private void recordTable(List<Record> records) {
+		Object [][] data = new Object[records.size()][Record.columns.length];
+		
+		for(int i=0; i < records.size(); i++){
+			data[i][0] = records.get(i).getId();
+			data[i][1] = records.get(i).getName();
+			data[i][2] = records.get(i).getArtistId();
+			data[i][3] = records.get(i).getTypeId();
+			data[i][4] = records.get(i).getReps();
+			data[i][5] = records.get(i).getBarsPerRepeat();
+			data[i][6] = records.get(i).getPlayTime();
+		}
+		
+		model = createModel(data,Record.columns);
 	}
 	
 	private DefaultTableModel createModel(Object[][] data, String[] columns){
@@ -157,7 +187,8 @@ public class ListResults extends JPanel{
 	}
 	
 	private void errorMessage(String msg){
-		JOptionPane.showMessageDialog(null,
+		JOptionPane.showMessageDialog(
+				null,
 			    msg,
 			    "Error Message",
 			    JOptionPane.ERROR_MESSAGE);
