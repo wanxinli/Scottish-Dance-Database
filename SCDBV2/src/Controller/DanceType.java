@@ -1,6 +1,7 @@
 package Controller;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +9,16 @@ import java.util.List;
 import Model.SqlConnection;
 import Model.SqlQuery;
 
+/**
+ * 
+ * @author Wanxin Li
+ *
+ */
 public class DanceType extends CategoryObj {
 	private int id;
 	private String name;
 	private String short_name;
+	public static final String[] columns = { "id", "name", "short_name"};
 
 	public DanceType(int id, String name, String short_name) {
 		this.id = id;
@@ -46,11 +53,12 @@ public class DanceType extends CategoryObj {
 	public static List<DanceType> searchByKey(String searcKey) {
 		SqlConnection con = new SqlConnection();
 		SqlQuery query = new SqlQuery(con.getConnection(), "dancetype");
-		ResultSet results = query.searchByName("name", searcKey);
+		ResultSet results = query.searchByName("id", searcKey);
 		List<DanceType> dancetypes = new ArrayList<DanceType>();
 		try {
 			while (results.next()) {
-				DanceType dancetype = new DanceType(results.getInt("id"), results.getString("name"), results.getString("short_name"));
+				DanceType dancetype = new DanceType(results.getInt("id"), results.getString("name"),
+						results.getString("short_name"));
 				dancetypes.add(dancetype);
 			}
 		} catch (SQLException e) {

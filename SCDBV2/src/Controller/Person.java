@@ -1,6 +1,7 @@
 package Controller;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +9,18 @@ import java.util.List;
 import Model.SqlConnection;
 import Model.SqlQuery;
 
+/**
+ * 
+ * @author Wanxin Li
+ *
+ */
 public class Person extends CategoryObj {
 	private int id;
 	private String name;
 	private String loctaion;
 	private int byear; // birth year
 	private int dyear; // dead year
+	public static final String[] columns = { "id", "name", "location", "byear", "dyear" };
 
 	public Person(int id, String name, String loctaion, int byear, int dyear) {
 		super();
@@ -67,7 +74,7 @@ public class Person extends CategoryObj {
 	public static List<Person> searchByKey(String searcKey) {
 		SqlConnection con = new SqlConnection();
 		SqlQuery query = new SqlQuery(con.getConnection(), "person");
-		ResultSet results = query.searchByName("name", searcKey);
+		ResultSet results = query.searchByName("id", searcKey);
 		List<Person> persons = new ArrayList<Person>();
 		try {
 			while (results.next()) {

@@ -8,10 +8,16 @@ import java.util.List;
 import Model.SqlConnection;
 import Model.SqlQuery;
 
+/**
+ * 
+ * @author Wanxin Li
+ *
+ */
 public class Shape extends CategoryObj{
 	private int id;
 	private String name;
 	private String short_name;
+	public static final String[] columns = { "id", "name", "short_name"};
 
 	public Shape(int id, String name, String short_name) {
 		this.id = id;
@@ -46,7 +52,7 @@ public class Shape extends CategoryObj{
 	public static List<Shape> searchByKey(String searcKey) {
 		SqlConnection con = new SqlConnection();
 		SqlQuery query = new SqlQuery(con.getConnection(), "shape");
-		ResultSet results = query.searchByName("name", searcKey);
+		ResultSet results = query.searchByName("id", searcKey);
 		List<Shape> shapes = new ArrayList<Shape>();
 		try {
 			while (results.next()) {

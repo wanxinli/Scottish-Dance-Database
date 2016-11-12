@@ -19,7 +19,7 @@ public class Dance extends CategoryObj {
 	private int type_id;
 	private int shape_id;
 	private int devisor_id;
-//	public static final String[] columns = { "id", "name", "type_id", "shape_id", "devisor_id" };
+	public static final String[] columns = { "id", "Name", "Type", "Shape", "Author" };
 
 	public Dance(int id, String name, int type_id, int shape_id, int devisor_id) {
 		this.id = id;
