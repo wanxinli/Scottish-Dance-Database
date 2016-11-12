@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.Album;
 import Controller.Dance;
+import Controller.Publication;
 import Controller.Record;
 
 /**
@@ -77,6 +78,16 @@ public class ListResults extends JPanel{
 					recordTable(records);
 					setupTable();
 				}
+			break;
+			case "publication":
+				List<Publication> publications = Publication.searchByKey(searchKey);
+				if (publications.isEmpty()){
+					ThrowError.errorMessage("No Results Found");
+				} else {
+					publicationTable(publications);
+					setupTable();
+				}
+			break;
 			default:
 			
 		}
@@ -183,6 +194,20 @@ public class ListResults extends JPanel{
 		
 		model = createModel(data,Record.columns);
 	}
+	
+	private void publicationTable(List<Publication> publications) {
+		Object [][] data = new Object[publications.size()][Publication.columns.length];
+		
+		for(int i=0; i < publications.size(); i++){
+			data[i][0] = publications.get(i).getId();
+			data[i][1] = publications.get(i).getname();
+			data[i][2] = publications.get(i).getPublishedBy();
+			data[i][3] = publications.get(i).getYear_idValue();
+		}
+		
+		model = createModel(data,Publication.columns);
+	}
+	
 	/**
 	 * 
 	 * @return String
