@@ -14,7 +14,9 @@ public class Record extends CategoryObj {
 	private int typeId;			// single character {R,S,M,J,h,etc}
 	private int reps;			// repetitions
 	private int barsPerRepeat;	// bars per repetition
+	private String type;
 	private int playTime;		// length of the recording
+	private Map 
 	public static final String [] columns = {"id","name","artist_id", "type_id", "repetitions", "barsperrepeat", "playingseconds"};
 
 	public Record(){}
@@ -26,6 +28,7 @@ public class Record extends CategoryObj {
 		this.typeId = typeId;
 		this.reps = reps;
 		this.barsPerRepeat = barsPerRepeat;
+		this.type = buildType(this.typeId, this.reps, this.barsPerRepeat);
 		this.playTime = playTime;
 	}
 
@@ -104,5 +107,9 @@ public class Record extends CategoryObj {
 			e.printStackTrace();
 		}
 		return records;
+	}
+	
+	private String buildType(int typeId, int barsPerRepeat, int reps) {
+		return
 	}
 }

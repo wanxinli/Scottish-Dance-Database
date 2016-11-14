@@ -8,7 +8,7 @@ package Model;
 
 public class DatabaseTable {
 	private String tableName;
-	private String forignKey;
+	private String forignKey; // spelling -> foreign
 	private String field;
 	DatabaseTable(String name, String forignKey, String field){
 		tableName = name;

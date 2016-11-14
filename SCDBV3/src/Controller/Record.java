@@ -1,4 +1,5 @@
 package Controller;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,20 +8,20 @@ import java.util.List;
 import Model.SqlConnection;
 import Model.SqlQuery;
 
-public class Record{
-	private int id;				// *Needed*
-	private String name; 		// Name
-	private int artistId; 		// Artist
-	private int typeId;			// single character {R,S,M,J,h,etc}
-	private int reps;			// repetitions
-	private int barsPerRepeat;	// bars per repetition
-	private int playTime;		// length of the recording
+public class Record {
+	private int id; // *Needed*
+	private String name; // Name
+	private int artistId; // Artist
+	private int typeId; // single character {R,S,M,J,h,etc}
+	private int reps; // repetitions
+	private int barsPerRepeat; // bars per repetition
+	private int playTime; // length of the recording
 	private String artist;
-	public static final String [] columns = {"id","name","artist_id", "type_id", "repetitions", "barsperrepeat", "playingseconds"};
+	public static final String[] columns = { "id", "name", "artist_id", "type_id", "repetitions", "barsperrepeat", "playingseconds" };
 
-	public Record(){}
+	public Record() {}
 
-	public Record(int id, String name, int artistId, int typeId, int reps, int barsPerRepeat, int playTime){
+	public Record(int id, String name, int artistId, int typeId, int reps, int barsPerRepeat, int playTime) {
 		this.id = id;
 		this.name = name;
 		this.artistId = artistId;
@@ -30,8 +31,8 @@ public class Record{
 		this.playTime = playTime;
 	}
 
-	/*Added by Taghreed*/
-	public Record(int id, String name, String artist, int typeId, int reps, int barsPerRepeat, int playTime){
+	/* Added by Taghreed */
+	public Record(int id, String name, String artist, int typeId, int reps, int barsPerRepeat, int playTime) {
 		this.id = id;
 		this.name = name;
 		this.artist = artist;
@@ -40,7 +41,7 @@ public class Record{
 		this.barsPerRepeat = barsPerRepeat;
 		this.playTime = playTime;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -100,22 +101,23 @@ public class Record{
 	public static String[] getColumns() {
 		return columns;
 	}
-	
-	/*Edited by Taghreed*/
-/**
- * 
- * @param searchKey
- * @return
- */
+
+	/* Edited by Taghreed */
+	/**
+	 * 
+	 * @param searchKey
+	 * @return
+	 */
 	public static List<Record> searchByKey(String searchKey) {
 		SqlConnection con = new SqlConnection();
-		SqlQuery query = new SqlQuery(con.getConnection(),"recording");
+		SqlQuery query = new SqlQuery(con.getConnection(), "recording");
 		ResultSet results = query.join2Tables("name", "artist_id", "display_name", "recording", "person", searchKey);
 		List<Record> records = new ArrayList<Record>();
 		try {
-			while(results.next()){
-				Record recording = new Record(results.getInt("id"), results.getString("name"),results.getString("personCol"),results.getInt("type_id"), 
-						results.getInt("repetitions"), results.getInt("barsperrepeat"), results.getInt("playingseconds"));
+			while (results.next()) {
+				Record recording = new Record(results.getInt("id"), results.getString("name"),
+						results.getString("personCol"), results.getInt("type_id"), results.getInt("repetitions"),
+						results.getInt("barsperrepeat"), results.getInt("playingseconds"));
 				records.add(recording);
 			}
 		} catch (SQLException e) {
@@ -123,14 +125,14 @@ public class Record{
 		}
 		return records;
 	}
-	/*Added by Taghreed*/
-public String getArtist() {
-	return artist;
-}
 
-public void setArtist(String artist) {
-	this.artist = artist;
-}
-	
-	
+	/* Added by Taghreed */
+	public String getArtist() {
+		return artist;
+	}
+
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
 }

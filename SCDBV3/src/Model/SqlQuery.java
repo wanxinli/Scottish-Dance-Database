@@ -24,7 +24,7 @@ public class SqlQuery
 	 * @param con
 	 * @param tableName
 	 */
-	public SqlQuery(Connection con, String tableName){
+	public SqlQuery(Connection con, String tableName){ // SqlQuery should use the sqlConnection object that you wrote right?
 		connection = con;
 		table = tableName;
 	}
