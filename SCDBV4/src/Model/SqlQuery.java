@@ -132,4 +132,56 @@ public class SqlQuery
 			}
 		return null;
 	}
+	
+	public ResultSet join3Tables(String PK, String table1ID1, String table2ID, String table1ID2, String table3ID, String table1, String table2, String table3, String searchKey){
+		Statement statement;
+		
+		try {
+			statement = connection.createStatement();
+			statement.setQueryTimeout(30);  
+			System.out.println("SELECT " + table1 + ".*, " + 
+					table2 + "." + table2ID + " AS " + table2 + "Col, " +
+					table3 + "." + table3ID + " AS " + table3 + "Col " +
+					"FROM " + table1 + 
+					" JOIN " +table2 + " ON (" + table1 +"." + table1ID1 + " = " + table2 + ".id ) " +
+					"JOIN  " + table3 + " ON (" + table1 +"." + table1ID2 + " = " + table3 + ".id ) " +
+					"WHERE " + table1 + "." + PK + " LIKE '%" + searchKey + "%'");
+			ResultSet rs = statement.executeQuery("SELECT " + table1 + ".*, " + 
+					table2 + "." + table2ID + " AS " + table2 + "Col, " +
+					table3 + "." + table3ID + " AS " + table3 + "Col " +
+					"FROM " + table1 + 
+					" JOIN " +table2 + " ON (" + table1 +"." + table1ID1 + " = " + table2 + ".id ) " +
+					"JOIN  " + table3 + " ON (" + table1 +"." + table1ID2 + " = " + table3 + ".id ) " +
+					"WHERE " + table1 + "." + PK + " LIKE '%" + searchKey + "%'");
+			return rs;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return null;
+	}
+	
+	public ResultSet mappingTableJoin3Tables(String table1ID1, String table1ID2, String table2ID, String table3ID, String table1, String table2, String table3, String searchKey){
+		Statement statement;
+		
+		try {
+			statement = connection.createStatement();
+			statement.setQueryTimeout(30);  
+			System.out.println("SELECT " + table1 + "." + table1ID2 + ", "  + 
+					table2 + ".*, " +
+					table3 + "." + table3ID + " AS " + table3 + "Col " +
+					"FROM " + table1 + " JOIN " + table2 + " ON (" + table1 +"." + table1ID2 + " = " + table2 + ".id ) " + 
+					"JOIN  " + table3 + " ON (" + table2 +"." + table2ID + " = " + table3 + ".id ) " +
+					"WHERE " + table1 + "." + table1ID1 + " LIKE '%" + searchKey + "%'");
+			ResultSet rs = statement.executeQuery("SELECT " + table1 + "." + table1ID2 + ", "  + 
+					table2 + ".*, " +
+					table3 + "." + table3ID + " AS " + table3 + "Col " +
+					"FROM " + table1 + " JOIN " + table2 + " ON (" + table1 +"." + table1ID2 + " = " + table2 + ".id ) " + 
+					"JOIN  " + table3 + " ON (" + table2 +"." + table2ID + " = " + table3 + ".id ) " +
+					"WHERE " + table1 + "." + table1ID1 + " LIKE '%" + searchKey + "%'");
+			return rs;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return null;
+	}
 }

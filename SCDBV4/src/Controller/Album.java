@@ -1,4 +1,8 @@
 package Controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /** written by Namami **/
 
 public class Album extends Controller{
@@ -38,4 +42,5 @@ public class Album extends Controller{
 	public void setArtist(String artist) {
 		this.artist = artist;
 	}
+	
 }

@@ -29,9 +29,29 @@ public abstract class Controller {
 		Controller controller = null;
 		try {
 		switch(tableName){
+		case "tune":
+			results = query.join2Tables("id", "composer_id", "name", "tune", "person", id);
+			if(results.next()){
+				controller = new Tune(results.getInt("id"),results.getString("name"),results.getString("personCol"));
+			}
+			break;	
+		case "recording":
+			results = query.join3Tables("id", "artist_id", "display_name", "type_id", "name", "recording", "person","dancetype", id);
+			if(results.next()){
+				controller = new Record(results.getInt("id"), results.getString("name"),results.getString("personCol"),results.getString("dancetypeCol"), 
+						results.getInt("repetitions"), results.getInt("barsperrepeat"));
+				List<Tune> tunes = new ArrayList<Tune>();
+				results = query.mappingTableJoin3Tables("recording_id", "tune_id","composer_id", "name", "tunesrecordingsmap", "tune","person", id);
+				while(results.next()){
+					Tune tune= new Tune(results.getInt("id"),results.getString("name"),results.getString("personCol"));
+					tunes.add(tune);
+				}
+				((Record) controller).setTunes(tunes);
+			}
+			break;
 			case "publication":
 				results = query.join2Tables("id", "devisor_id", "name", "publication", "person", id);
-				while(results.next()){
+				if(results.next()){
 					controller = new Publication(results.getInt("id"), results.getString("name"), results.getString("name"), results.getString("personCol"), results.getInt("year"), results.getBoolean("onpaper"));
 				}
 				break;
@@ -115,6 +135,27 @@ public abstract class Controller {
 		this.name = name;
 	}
 	
-	
+	public static List<Controller> getListRecords(String id, String tableName){
+		SqlConnection con = new SqlConnection();
+		SqlQuery query = new SqlQuery(con.getConnection(),tableName);
+		List<Controller> controllers = new ArrayList<Controller>();
+		ResultSet results = query.searchByName("id", id);
+		try {
+		switch(tableName){
+			case "album":
+				results = query.mappingTableJoin3Tables("album_id", "recording_id", "artist_id", "display_name", "albumsrecordingsmap", "recording","person", id);
+				while(results.next()){
+					Record controller = new Record(results.getInt("id"), results.getString("name"),results.getString("personCol"),results.getInt("type_id"), 
+							results.getInt("repetitions"), results.getInt("barsperrepeat"), results.getInt("playingseconds"));
+					controllers.add(controller);
+				}
+				break;
+		}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return controllers; 
+	}
 	
 }
