@@ -44,7 +44,7 @@ public class DetailedResult extends JPanel{
 		super();
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		this.id = id;
-		this. category = category;
+		this.category = category;
 		display();
 	}
 	
@@ -53,15 +53,15 @@ public class DetailedResult extends JPanel{
 			case "album":
 				Controller album = (Album) Album.searchByID(id,"album");							
 				if(album == null)
-					ThrowError.errorMessage("You should clicked on a record on the table");
+					ThrowError.errorMessage("You should click on a record in the table");
 				else{
 					albumInfo(album);
 				}
 				break;
 			case "recordings":
-				Controller recording = Record.searchByID(id, "recording");
+				Controller recording = Record.searchByID(id,"recording");
 				if(recording == null)
-					ThrowError.errorMessage("You should clicked on a record on the table");
+					ThrowError.errorMessage("You should click on a record in the table");
 				else{
 					recordingInfo(recording);
 				}
@@ -69,15 +69,15 @@ public class DetailedResult extends JPanel{
 			case "publication":
 				Controller publication = Publication.searchByID(id,"publication");
 				if(publication == null)
-					ThrowError.errorMessage("You should clicked on a record on the table");
+					ThrowError.errorMessage("You should click on a record in the table");
 				else{
 					publicationInfo(publication);
 				}
-			break;
+				break;
 			case "tune":
 				Controller tune = Tune.searchByID(id,"tune");
 				if(tune == null)
-					ThrowError.errorMessage("You should clicked on a record on the table");
+					ThrowError.errorMessage("You should clicked a record in the table");
 				else{
 					tuneInfo(tune);
 				}
@@ -89,9 +89,9 @@ public class DetailedResult extends JPanel{
 		cb1.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			//	Owned.mark(id,category);
+				Owned.mark(id,category);
 				SuccessfulMsg.message("The record has been marked successfully");
-				System.out.println("FROM MOUSE CLicked");
+				System.out.println("FROM MOUSE Clicked");
 			}
 
 			@Override
@@ -158,7 +158,7 @@ public class DetailedResult extends JPanel{
 			data[i][0] = tune.getId();
 			data[i][1] = tune.getName();
 			data[i][2] = tune.getcomposer();
-			data[i][3] = "";//Owned.read(record.getId(),"tune");
+			data[i][3] = Owned.isOwned(tune.getId(),"tune");
 		}
 		model = createModel(data,Tune.columns);
 		
@@ -172,7 +172,7 @@ public class DetailedResult extends JPanel{
 			data[i][1] = record.getName();
 			data[i][2] = record.getArtist();
 			data[i][3] = record.getTypeName().substring(0,1) + record.getBarsPerRepeat() + " " + record.getReps();
-			data[i][4] = "";//Owned.read(record.getId(),"recordings");
+			data[i][4] = Owned.isOwned(record.getId(),"recordings");
 			
 		}
 		model = createModel(data,Record.columns);

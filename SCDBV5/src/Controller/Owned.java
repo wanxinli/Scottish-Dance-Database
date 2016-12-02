@@ -2,7 +2,6 @@ package Controller;
 
 import java.io.FileWriter;
 import java.io.IOException;
-//import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.File;
@@ -56,13 +55,13 @@ public class Owned {
 	}
 
 	@SuppressWarnings("unchecked") // For the put operation. For now.
-	public static void mark(int id, String tableName) {
+	public static void mark(String id, String tableName) {
 		objState.putIfAbsent(id, tableName);
 		Owned.write(objState);
 	}
 
 	@SuppressWarnings("unchecked") // For the put operation. For now.
-	public static void mark(int id, String tableName, int[] collection, String collectionTableName) {
+	public static void mark(String id, String tableName, int[] collection, String collectionTableName) {
 		for (int el : collection) {
 			objState.putIfAbsent(el, collectionTableName);
 		}
