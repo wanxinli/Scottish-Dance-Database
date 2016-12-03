@@ -84,12 +84,14 @@ public class DetailedResult extends JPanel{
 				break;
 			default:
 		}
+		
 		JPanel panel = new JPanel();
 		Checkbox cb1 = new Checkbox();
 		cb1.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Owned.mark(id,category);
+				// This needs to change depending on what category you're marking, as well as if you're unmarking as well.
+				Owned.mark(id,category); 
 				SuccessfulMsg.message("The record has been marked successfully");
 				System.out.println("FROM MOUSE Clicked");
 			}
@@ -118,7 +120,7 @@ public class DetailedResult extends JPanel{
 				
 			}
 		}
-);
+		);
 		cb1.setLabel("Mark");
 		panel.add(cb1);
 		panel.setAlignmentY(BOTTOM_ALIGNMENT);
