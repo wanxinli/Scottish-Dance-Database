@@ -1,26 +1,40 @@
 package Controller;
 
+import java.util.List;
+
 /**
  * 
  * @author Wanxin Li
  *
  */
-public class Dance extends Controller{
-	
+public class Dance extends Controller {
+
 	private String authorName;
 	private String type;
 	private String shape;
-	private int barsperrepeated;
-	public static final String[] columns = { "id", "name", "type", "shape", "author", "barsperrepeat", "marked"};
-	
-	public Dance(int id, String name, String type, String shape, String authorName, int barsperrepeated) {
-		super(id,name);
+	//
+	private int barsperrepeat;
+	private List<Formation> formations;
+	//
+	public static final String[] columns = { "id", "name", "type", "shape", "author" };
+
+	public Dance(int id, String name, String type, String shape, String authorName) {
+		super(id, name);
 		this.type = type;
 		this.shape = shape;
 		this.authorName = authorName;
-		this.barsperrepeated = barsperrepeated;
-	}	
-	
+	}
+
+	//
+	public Dance(int id, String name, String type, String shape, String authorName, int barsperrepeat) {
+		super(id, name);
+		this.type = type;
+		this.shape = shape;
+		this.authorName = authorName;
+		this.setBarsperrepeat(barsperrepeat);
+	}
+
+	//
 	public String getType() {
 		return type;
 	}
@@ -36,7 +50,7 @@ public class Dance extends Controller{
 	public void setShape(String shape) {
 		this.shape = shape;
 	}
-	
+
 	public String getAuthorName() {
 		return authorName;
 	}
@@ -45,12 +59,23 @@ public class Dance extends Controller{
 		this.authorName = authorName;
 	}
 
-	public int getBarsperrepeated() {
-		return barsperrepeated;
+	//
+	public int getBarsperrepeat() {
+		return barsperrepeat;
 	}
 
-	public void setBarsperrepeated(int barsperrepeated) {
-		this.barsperrepeated = barsperrepeated;
+	public void setBarsperrepeat(int barsperrepeat) {
+		this.barsperrepeat = barsperrepeat;
 	}
 	
+
+	public List<Formation> getFormations() {
+		return formations;
+	}
+
+	public void setFormations(List<Formation> formations) {
+		this.formations = formations;
+	}
+
+	//
 }
