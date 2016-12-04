@@ -29,6 +29,31 @@ public abstract class Controller {
 		Controller controller = null;
 		try {
 		switch(tableName){
+		//Wanxin
+			case "dance":
+				results = query.join4Tables("id", "devisor_id", "type_id", "shape_id", "name", "name", "name", "dance",
+						"person", "dancetype", "shape", id);
+				if (results.next()) {
+					controller = new Dance(results.getInt("id"), results.getString("name"),
+							results.getString("dancetypeCol"), results.getString("shapeCol"),
+							results.getString("personCol"), results.getInt("barsperrepeat"));
+
+					List<Formation> formations = new ArrayList<Formation>();
+					results = query.join2Tables("dance_id", "formation_id", "name", "dancesformationsmap", "formation",
+							id);
+					while (results.next()) {
+						Formation formation = new Formation(results.getInt("id"), results.getString("formationCol"));
+						formations.add(formation);
+					}
+					((Dance) controller).setFormations(formations);
+
+					results = query.join2Tables("dance_id", "publication_id", "name", "dancespublicationsmap",
+							"publication", id);
+					Publication publication = new Publication(results.getInt("id"), results.getString("publicationCol"));
+					((Dance) controller).setPublication(publication);
+				}
+				break;
+		 //
 		case "tune":
 			results = query.join2Tables("id", "composer_id", "name", "tune", "person", id);
 			if(results.next()){
