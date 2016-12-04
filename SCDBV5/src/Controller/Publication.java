@@ -21,6 +21,13 @@ public class Publication extends Controller{
 		this.setShortName(shortName);
 		this.setOnpaper(onpaper);
 	}
+	//Wanxin
+	
+	public Publication(int id, String name){
+		super(id, name);
+	}
+	
+	//
 	
 	public int getYear() {
 		return Year_idValue;
