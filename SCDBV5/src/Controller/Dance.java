@@ -15,6 +15,7 @@ public class Dance extends Controller {
 	//
 	private int barsperrepeat;
 	private List<Formation> formations;
+	private Publication publication;
 	//
 	public static final String[] columns = { "id", "name", "type", "shape", "author" };
 
@@ -67,7 +68,6 @@ public class Dance extends Controller {
 	public void setBarsperrepeat(int barsperrepeat) {
 		this.barsperrepeat = barsperrepeat;
 	}
-	
 
 	public List<Formation> getFormations() {
 		return formations;
@@ -77,5 +77,12 @@ public class Dance extends Controller {
 		this.formations = formations;
 	}
 
+	public Publication getPublication() {
+		return publication;
+	}
+
+	public void setPublication(Publication publication) {
+		this.publication = publication;
+	}
 	//
 }
