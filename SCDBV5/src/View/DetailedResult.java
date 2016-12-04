@@ -255,17 +255,18 @@ private void albumInfo(Controller album) {
 	add(spTable);
 
 }
-	//Wanxin
+	// Wanxin
 	private void danceInfo(Controller dan) {
 		Dance dance = (Dance) dan;
+		Publication pub = dance.getPublication();
 		JLabel title = new JLabel("Dance: " + dance.getName());
 		title.setForeground(Color.RED);
-		title.setAlignmentX(TOP_ALIGNMENT);
-		title.setAlignmentY(RIGHT_ALIGNMENT);
+		title.setAlignmentY(TOP_ALIGNMENT);
+		title.setAlignmentX(RIGHT_ALIGNMENT);
 		add(title);
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(4, 2));
+		panel.setLayout(new GridLayout(5, 2));
 		panel.add(new JLabel("Type"));
 		panel.add(new JLabel(dance.getType()));
 		panel.add(new JLabel("Shape"));
@@ -274,6 +275,8 @@ private void albumInfo(Controller album) {
 		panel.add(new JLabel(dance.getAuthorName()));
 		panel.add(new JLabel("Bars/Repeat"));
 		panel.add(new JLabel("" + dance.getBarsperrepeat()));
+		panel.add(new JLabel("Published in"));
+		panel.add(new JLabel("" + pub.getName()));
 		panel.setAlignmentX(CENTER_ALIGNMENT);
 		panel.setAlignmentY(CENTER_ALIGNMENT);
 		add(panel);
