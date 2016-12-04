@@ -82,6 +82,16 @@ public class DetailedResult extends JPanel{
 					tuneInfo(tune);
 				}
 				break;
+		//Wanxin
+		        case "dance":
+			        Controller dance = Dance.searchByID(id, "dance");
+			        if (dance == null)
+				        ThrowError.errorMessage("You should clicked on a record on the table");
+			        else {
+				        danceInfo(dance);
+			        }
+			        break;
+		//
 			default:
 		}
 		
@@ -245,7 +255,48 @@ private void albumInfo(Controller album) {
 	add(spTable);
 
 }
+	//Wanxin
+	private void danceInfo(Controller dan) {
+		Dance dance = (Dance) dan;
+		JLabel title = new JLabel("Dance: " + dance.getName());
+		title.setForeground(Color.RED);
+		title.setAlignmentX(TOP_ALIGNMENT);
+		title.setAlignmentY(RIGHT_ALIGNMENT);
+		add(title);
 
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(4, 2));
+		panel.add(new JLabel("Type"));
+		panel.add(new JLabel(dance.getType()));
+		panel.add(new JLabel("Shape"));
+		panel.add(new JLabel(dance.getShape()));
+		panel.add(new JLabel("Devised by"));
+		panel.add(new JLabel(dance.getAuthorName()));
+		panel.add(new JLabel("Bars/Repeat"));
+		panel.add(new JLabel("" + dance.getBarsperrepeat()));
+		panel.setAlignmentX(CENTER_ALIGNMENT);
+		panel.setAlignmentY(CENTER_ALIGNMENT);
+		add(panel);
+
+		List<Formation> formations = dance.getFormations();
+		formationTable(formations);
+		setupTable("formation");
+		spTable.setAlignmentX(CENTER_ALIGNMENT);
+		spTable.setAlignmentY(LEFT_ALIGNMENT);
+		add(spTable);
+	}
+
+	private void formationTable(List<Formation> formations) {
+		Object[][] data = new Object[formations.size()][Formation.columns.length];
+		for (int i = 0; i < formations.size(); i++) {
+			Formation formation = formations.get(i);
+			data[i][0] = formation.getId();
+			data[i][1] = formation.getName();
+		}
+		model = createModel(data, Formation.columns);
+
+	}
+	//
 private void setupTable(String tableName){
 	table = new JTable(model);
 	spTable = new JScrollPane(table);
