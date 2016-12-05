@@ -103,27 +103,20 @@ public class DetailedResult extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 
 				switch(category) {
-//				
-				default:
-					Owned.mark(id,category);
-					Owned.commitTransaction();
-					SuccessfulMsg.message("The record has been marked successfully");
-					break;
-				case "album":
+					
+				case "album": // This works fine, except for the performance issues lol
 					Owned.mark(id, category);
 					List<Controller> collection = Controller.getListRecords(id,category);
-					
 					for(Controller el: collection) {
 						Owned.mark(Integer.toString(el.getId()), "recording");						
 					}
-					
 					Owned.commitTransaction();
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
 					
-				case "publication":
+				case "publication": // Not quite working yet
 					Owned.mark(id, category);
-					List<Controller> colexion = Publication.getListRecords(id,category);
+					List<Controller> colexion = Controller.searchByKey(id, category);
 					
 					for(Controller el: colexion) {
 						Owned.mark(Integer.toString(el.getId()), "dance");
@@ -133,10 +126,25 @@ public class DetailedResult extends JPanel{
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
 					
-//				case "recording":
+//				case "recording": // We're gonna hold off on this for a sec
+//					Owned.mark(id,category);
+//					
+//					Owned.commitTransaction();
+//					SuccessfulMsg.message("The record has been marked successfully");
 //					break;
+//
 //				case "dance":
+//					Owned.mark(id,category);
+//					
+//					Owned.commitTransaction();
+//					SuccessfulMsg.message("The record has been marked successfully");
 //					break;
+					
+				default:
+					Owned.mark(id,category);
+					Owned.commitTransaction();
+					SuccessfulMsg.message("The record has been marked successfully");
+					break;
 				}
 					
 //				System.out.println("Mouse Clicked");
@@ -348,7 +356,7 @@ private void setupTable(String tableName){
 			int row = (int) table.getModel().getValueAt(table.getSelectedRow(),0);
 			JPanel panel = new DetailedResult(Integer.toString(row),tableName);
 			add(panel);
-			System.out.println("FROM MOUSE CLicked");
+//			System.out.println("FROM MOUSE CLicked");
 		}
 
 		@Override

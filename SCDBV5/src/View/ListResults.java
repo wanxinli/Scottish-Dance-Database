@@ -56,6 +56,7 @@ public class ListResults extends JPanel{
 		switch(category){
 			case "album":
 				List<Controller> albums = Controller.searchByKey(searchKey,"album");
+
 				if(albums.isEmpty()){
 					ThrowError.errorMessage("No Results Found");
 				}
@@ -116,7 +117,7 @@ public class ListResults extends JPanel{
 				int row = (int) table.getModel().getValueAt(table.getSelectedRow(),0);
 				JPanel panel = new DetailedResult(Integer.toString(row),category);
 				add(panel);
-				System.out.println("FROM MOUSE CLicked");
+//				System.out.println("FROM MOUSE CLicked");
 			}
 
 			@Override

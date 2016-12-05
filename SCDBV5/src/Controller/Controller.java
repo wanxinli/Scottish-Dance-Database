@@ -182,6 +182,7 @@ public abstract class Controller {
 		switch(tableName){
 			case "album":
 				results = query.mappingTableJoin4Tables("album_id", "recording_id", "artist_id", "type_id", "name", "display_name", "name", "albumsrecordingsmap", "recording","person","dancetype", id);
+				// This code block MIGHT be what is causing the performance issues
 				while(results.next()){
 					Record controller = new Record(results.getInt("id"), results.getString("name"),results.getString("personCol"),results.getString("dancetypeCol"), 
 							results.getInt("repetitions"), results.getInt("barsperrepeat"));
@@ -195,6 +196,7 @@ public abstract class Controller {
 					((Record) controller).setTunes(tunes);
 					controllers.add(controller);
 				}
+				// END OF Code Block
 				break;
 		}
 		} 
