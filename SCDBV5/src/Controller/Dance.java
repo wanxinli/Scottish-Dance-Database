@@ -8,16 +8,13 @@ import java.util.List;
  *
  */
 public class Dance extends Controller {
-
 	private String authorName;
 	private String type;
 	private String shape;
-	//
 	private int barsperrepeat;
 	private List<Formation> formations;
 	private Publication publication;
-	//
-	public static final String[] columns = { "id", "name", "type", "shape", "author" };
+	public static final String[] columns = { "Id", "Name", "Type", "Shape", "Author", "BarsPerRepeat", "Owned" };
 
 	public Dance(int id, String name, String type, String shape, String authorName) {
 		super(id, name);
@@ -26,16 +23,14 @@ public class Dance extends Controller {
 		this.authorName = authorName;
 	}
 
-	//
 	public Dance(int id, String name, String type, String shape, String authorName, int barsperrepeat) {
 		super(id, name);
 		this.type = type;
 		this.shape = shape;
 		this.authorName = authorName;
-		this.setBarsperrepeat(barsperrepeat);
+		this.barsperrepeat = (barsperrepeat);
 	}
 
-	//
 	public String getType() {
 		return type;
 	}
@@ -60,7 +55,6 @@ public class Dance extends Controller {
 		this.authorName = authorName;
 	}
 
-	//
 	public int getBarsperrepeat() {
 		return barsperrepeat;
 	}
@@ -84,5 +78,4 @@ public class Dance extends Controller {
 	public void setPublication(Publication publication) {
 		this.publication = publication;
 	}
-	//
 }

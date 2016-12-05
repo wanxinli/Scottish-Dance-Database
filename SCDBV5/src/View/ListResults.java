@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.Album;
 import Controller.Controller;
 import Controller.Dance;
+import Controller.Owned;
 import Controller.Publication;
 import Controller.Record;
 
@@ -56,7 +57,7 @@ public class ListResults extends JPanel{
 			case "album":
 				List<Controller> albums = Controller.searchByKey(searchKey,"album");
 				if(albums.isEmpty()){
-					ThrowError.errorMessage("There is no data matches the input ");
+					ThrowError.errorMessage("No Results Found");
 				}
 				else{
 					albumTable(albums);
@@ -66,7 +67,7 @@ public class ListResults extends JPanel{
 			case "dance":
 				List<Controller> dances = Controller.searchByKey(searchKey,"dance");
 		        if (dances.isEmpty()) {
-			        ThrowError.errorMessage("There is no data matches the input ");
+			        ThrowError.errorMessage("No Results Found");
 		        } else {
 			        danceTable(dances);
 			        setupTable();
@@ -152,8 +153,9 @@ public class ListResults extends JPanel{
 			data[i][1] = album.getName();
 			data[i][2] = album.getArtist();
 			data[i][3] = album.getproductionyear();
-			data[i][4] = "";//Owned.read(album.getId(),category);
+			data[i][4] = Owned.isOwned(album.getId(),category);
 		}
+		
 		model = createModel(data,Album.columns);
 		
 	}
@@ -165,6 +167,7 @@ public class ListResults extends JPanel{
 	 */
 	private void danceTable(List<Controller> dances) {
 		Object [][] data = new Object[dances.size()][Dance.columns.length];
+		
 		for (int i = 0; i < dances.size(); i++) {
 			Dance dance = (Dance) dances.get(i);
 			data[i][0] = dance.getId();
@@ -172,8 +175,8 @@ public class ListResults extends JPanel{
 			data[i][2] = dance.getType();
 			data[i][3] = dance.getShape();
 			data[i][4] = dance.getAuthorName();
-			data[i][5] = dance.getBarsperrepeated();
-			data[i][6] = "";//Owned.read(dance.getId(),category);
+			data[i][5] = dance.getBarsperrepeat();
+			data[i][6] = Owned.isOwned(dance.getId(),category);
 		}
 		model = createModel(data, Dance.columns);
 	}
@@ -192,7 +195,7 @@ public class ListResults extends JPanel{
 			data[i][1] = record.getName();
 			data[i][2] = record.getArtist();
 			data[i][3] = record.getTypeName().substring(0,1) + record.getBarsPerRepeat() + " " + record.getReps();
-			data[i][4] = "";//Owned.read(record.getId(),category);
+			data[i][4] = Owned.isOwned(record.getId(),category);
 		}
 		
 		model = createModel(data,Record.columns);
@@ -206,7 +209,7 @@ public class ListResults extends JPanel{
 			data[i][1] = publication.getName();
 			data[i][2] = publication.getPublishedBy();
 			data[i][3] = publication.getYear();
-			data[i][4] = "";//Owned.read(publication.getId(),category);
+			data[i][4] = Owned.isOwned(publication.getId(),category);
 		}
 		
 		model = createModel(data,Publication.columns);

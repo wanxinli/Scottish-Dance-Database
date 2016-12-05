@@ -12,46 +12,57 @@ import org.json.simple.parser.ParseException;
 
 public class Owned {
 
-	private static String jsonPath = System.getProperty("." + File.separator + "owned.json");
+	private static FileWriter fw;
+	private static FileReader fr;
+	private static File jsonPath = new File("owned.json");
 	private static JSONObject objState;
 
-	private static void write(JSONObject jsobj) {
-		try (FileWriter file = new FileWriter(jsonPath)) {
-			file.write(jsobj.toJSONString());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private static void init() {
-		try (FileWriter file = new FileWriter(jsonPath)) {
-			file.write("{}");
+		try {
+			fw = new FileWriter(jsonPath);
+			fw.write("{}");
+			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	private static void write(JSONObject jsobj) {
+		try {
+			fw = new FileWriter(jsonPath);
+			fw.write(jsobj.toJSONString());
+			fw.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void read() {
 
 		JSONParser parse = new JSONParser();
 
 		try {
 
-			Object obj = parse.parse(new FileReader(jsonPath));
+			fr = new FileReader(jsonPath);
+			Object obj = parse.parse(fr);
 			objState = (JSONObject) obj;
-
-		} catch (FileNotFoundException | ParseException e) {
+			fr.close();
+			
+		} catch (FileNotFoundException e) {
 			Owned.init();
 			e.printStackTrace();
+		} catch ( ParseException e ) {
+//			System.out.println("malformed json file.");
+			e.printStackTrace();
 		} catch (IOException e) {
+//			Owned.init();
 			e.printStackTrace();
 		}
-
 	}
 
 	public static boolean isOwned(int id, String tableName) {
-		return objState.containsKey(tableName) && objState.containsValue(id);
-		// There has to be a better way
+		return objState.containsKey((String) Integer.toString(id)) && objState.containsValue((String) tableName);
+		// There has to be a better way...
 	}
 
 	@SuppressWarnings("unchecked") // For the put operation. For now.

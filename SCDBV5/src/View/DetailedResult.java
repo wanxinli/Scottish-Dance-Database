@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.Album;
 import Controller.Controller;
 import Controller.Dance;
+import Controller.Formation;
 import Controller.Media;
 import Controller.Owned;
 import Controller.Publication;
@@ -103,31 +104,26 @@ public class DetailedResult extends JPanel{
 				// This needs to change depending on what category you're marking, as well as if you're unmarking as well.
 				Owned.mark(id,category); 
 				SuccessfulMsg.message("The record has been marked successfully");
-				System.out.println("FROM MOUSE Clicked");
+				System.out.println("Mouse Clicked");
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 		}
 		);
@@ -339,6 +335,7 @@ private void setupTable(String tableName){
     	
     });
 }
+
 /**
  * 
  * @param data

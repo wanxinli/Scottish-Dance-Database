@@ -17,7 +17,8 @@ public class MainClass {
 		Owned.read();
 		
 		 EventQueue.invokeLater(new Runnable() {
-	            public void run() {
+	            @SuppressWarnings("unused")
+				public void run() {
 	            	FrameDB frame = new FrameDB();
 	            }
 	        });

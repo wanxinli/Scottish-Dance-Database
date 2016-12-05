@@ -21,8 +21,8 @@ public abstract class Controller {
 		this.id = id;
 		this.name = name;
 	}
-	public static Controller searchByID(String id, String tableName)
-	{
+	
+	public static Controller searchByID(String id, String tableName) {
 		SqlConnection con = new SqlConnection();
 		SqlQuery query = new SqlQuery(con.getConnection(),tableName);
 		ResultSet results = query.searchByName("id", id);

@@ -16,6 +16,7 @@ public class albumsrecordingsmap /*extends CategoryObj*/{
 	private int idValue2;
 	private int album_idValue2;
 	private int recording_idValue;
+	@SuppressWarnings("unused")
 	private int track_numberValue;
 	public static final String [] columns = {"id","recording_id", "album_id","tracknumber"};
 	
