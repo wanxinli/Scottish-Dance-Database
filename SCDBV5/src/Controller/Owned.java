@@ -62,7 +62,7 @@ public class Owned {
 	}
 
 	public static boolean isOwned(int id, String tableName) {
-		System.out.println("JSON FILE OWNED CHECK");
+//		System.out.println("JSON FILE OWNED CHECK");
 		return objState.containsKey((String) Integer.toString(id)) && objState.containsValue((String) tableName);
 	}
 

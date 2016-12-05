@@ -103,44 +103,48 @@ public class DetailedResult extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 
 				switch(category) {
-//				
+					
+				case "album": // This works fine, except for the performance issues lol
+					Owned.mark(id, category);
+					List<Controller> collection = Controller.getListRecords(id,category);
+					for(Controller el: collection) {
+						Owned.mark(Integer.toString(el.getId()), "recording");						
+					}
+					Owned.commitTransaction();
+					SuccessfulMsg.message("The record has been marked successfully");
+					break;
+					
+				case "publication": // Not quite working yet
+					Owned.mark(id, category);
+					List<Controller> colexion = Controller.searchByKey(id, category);
+					
+					for(Controller el: colexion) {
+						Owned.mark(Integer.toString(el.getId()), "dance");
+					}
+					
+					Owned.commitTransaction();
+					SuccessfulMsg.message("The record has been marked successfully");
+					break;
+					
+//				case "recording": // We're gonna hold off on this for a sec
+//					Owned.mark(id,category);
+//					
+//					Owned.commitTransaction();
+//					SuccessfulMsg.message("The record has been marked successfully");
+//					break;
+//
+//				case "dance":
+//					Owned.mark(id,category);
+//					
+//					Owned.commitTransaction();
+//					SuccessfulMsg.message("The record has been marked successfully");
+//					break;
+					
 				default:
 					Owned.mark(id,category);
 					Owned.commitTransaction();
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
-					
-				case "album":
-					Owned.mark(id, category);
-//					List<Controller> collection = Controller.getListRecords(id,category);
-					
-//					for(Controller el: collection) {
-//						Owned.mark(Integer.toString(el.getId()), "recording");						
-//					}
-					
-					Owned.commitTransaction();
-					SuccessfulMsg.message("The record has been marked successfully");
-					break;
-					
-				case "publication":
-					Owned.mark(id, category);
-//					List<Controller> colexion = Publication.getListRecords(id,category);
-//					
-//					for(Controller el: colexion) {
-//						Owned.mark(Integer.toString(el.getId()), "dance");
-//					}
-					
-					Owned.commitTransaction();
-					SuccessfulMsg.message("The record has been marked successfully");
-					break;
-					
-				case "recording":
-					Owned.mark(id,category);
-					Owned.commitTransaction();
-					break;
-
-					//				case "dance":
-//					break;
 				}
 					
 //				System.out.println("Mouse Clicked");
