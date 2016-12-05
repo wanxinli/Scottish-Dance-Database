@@ -106,23 +106,30 @@ public class DetailedResult extends JPanel{
 //				
 				default:
 					Owned.mark(id,category);
+					Owned.commitTransaction();
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
 				case "album":
 					Owned.mark(id, category);
 					List<Controller> collection = Controller.getListRecords(id,category);
+					
 					for(Controller el: collection) {
 						Owned.mark(Integer.toString(el.getId()), "recording");						
 					}
+					
+					Owned.commitTransaction();
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
 					
 				case "publication":
 					Owned.mark(id, category);
 					List<Controller> colexion = Publication.getListRecords(id,category);
+					
 					for(Controller el: colexion) {
 						Owned.mark(Integer.toString(el.getId()), "dance");
 					}
+					
+					Owned.commitTransaction();
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
 					

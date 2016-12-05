@@ -62,13 +62,11 @@ public class Owned {
 
 	public static boolean isOwned(int id, String tableName) {
 		return objState.containsKey((String) Integer.toString(id)) && objState.containsValue((String) tableName);
-		// There has to be a better way...
 	}
 
 	@SuppressWarnings("unchecked") // For the put operation. For now.
 	public static void mark(String id, String tableName) {
 		objState.putIfAbsent(id, tableName);
-		Owned.write(objState);
 	}
 
 	@SuppressWarnings("unchecked") // For the put operation. For now.
@@ -76,33 +74,34 @@ public class Owned {
 		for (int el : collection) {
 			objState.putIfAbsent(el, collectionTableName);
 		}
-
 		objState.putIfAbsent(id, tableName);
-
+	}
+	
+	public static void commitTransaction() {
 		Owned.write(objState);
 	}
 
-	public static void unmark(int id) {
-		if (objState.containsKey(id)) {
-			objState.remove(id);
-		} else {
-			System.out.println("Wrong function was probably used here. You want to use the mark(int id) method, not unmark(int id)");
-			System.out.println("Just in case..... You tried to unmark something that you haven't marked yet.");
-		}
-	}
-
-	public static void unmark(int id, int[] collection) {
-		for (int el : collection) {
-			if (objState.containsKey(el)) {
-				objState.remove(el);
-			}
-		}
-		if (objState.containsKey(id)) {
-			objState.remove(id);
-		} else {
-			System.out.println("Wrong function was probably used here. You want to use the mark(int id) method, not unmark(int id)");
-			System.out.println("Just in case..... You tried to unmark something that you haven't marked yet.");
-		}
-	}
+//	public static void unmark(int id) {
+//		if (objState.containsKey(id)) {
+//			objState.remove(id);
+//		} else {
+//			System.out.println("Wrong function was probably used here. You want to use the mark(int id) method, not unmark(int id)");
+//			System.out.println("Just in case..... You tried to unmark something that you haven't marked yet.");
+//		}
+//	}
+//
+//	public static void unmark(int id, int[] collection) {
+//		for (int el : collection) {
+//			if (objState.containsKey(el)) {
+//				objState.remove(el);
+//			}
+//		}
+//		if (objState.containsKey(id)) {
+//			objState.remove(id);
+//		} else {
+//			System.out.println("Wrong function was probably used here. You want to use the mark(int id) method, not unmark(int id)");
+//			System.out.println("Just in case..... You tried to unmark something that you haven't marked yet.");
+//		}
+//	}
 
 }
