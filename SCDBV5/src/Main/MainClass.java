@@ -16,7 +16,7 @@ public class MainClass {
 		// Calling Owned here to make sure the json file is loaded into memory
 		Owned.read();
 		
-		 EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 	            @SuppressWarnings("unused")
 				public void run() {
 	            	FrameDB frame = new FrameDB();

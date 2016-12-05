@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.FileWriter;
 import java.io.IOException;
+
 import org.json.simple.JSONObject;
 
 import java.io.File;
@@ -18,6 +19,7 @@ public class Owned {
 	private static JSONObject objState;
 
 	private static void init() {
+		System.out.println("JSON FILE INIT");
 		try {
 			fw = new FileWriter(jsonPath);
 			fw.write("{}");
@@ -28,6 +30,7 @@ public class Owned {
 	}
 	
 	private static void write(JSONObject jsobj) {
+		System.out.println("JSON FILE WRITE.");
 		try {
 			fw = new FileWriter(jsonPath);
 			fw.write(jsobj.toJSONString());
@@ -38,7 +41,7 @@ public class Owned {
 	}
 	
 	public static void read() {
-
+		System.out.println("JSON FILE READ");
 		JSONParser parse = new JSONParser();
 
 		try {
@@ -52,25 +55,26 @@ public class Owned {
 			Owned.init();
 			e.printStackTrace();
 		} catch ( ParseException e ) {
-//			System.out.println("malformed json file.");
 			e.printStackTrace();
 		} catch (IOException e) {
-//			Owned.init();
 			e.printStackTrace();
 		}
 	}
 
 	public static boolean isOwned(int id, String tableName) {
+		System.out.println("JSON FILE OWNED CHECK");
 		return objState.containsKey((String) Integer.toString(id)) && objState.containsValue((String) tableName);
 	}
 
 	@SuppressWarnings("unchecked") // For the put operation. For now.
 	public static void mark(String id, String tableName) {
+		System.out.println("MARKED");
 		objState.putIfAbsent(id, tableName);
 	}
 
 	@SuppressWarnings("unchecked") // For the put operation. For now.
 	public static void mark(String id, String tableName, int[] collection, String collectionTableName) {
+		System.out.println("MARKED #2");
 		for (int el : collection) {
 			objState.putIfAbsent(el, collectionTableName);
 		}
@@ -78,6 +82,7 @@ public class Owned {
 	}
 	
 	public static void commitTransaction() {
+		System.out.println("COMMIT TRANSACTION");
 		Owned.write(objState);
 	}
 

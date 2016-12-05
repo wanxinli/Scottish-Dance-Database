@@ -109,13 +109,14 @@ public class DetailedResult extends JPanel{
 					Owned.commitTransaction();
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
+					
 				case "album":
 					Owned.mark(id, category);
-					List<Controller> collection = Controller.getListRecords(id,category);
+//					List<Controller> collection = Controller.getListRecords(id,category);
 					
-					for(Controller el: collection) {
-						Owned.mark(Integer.toString(el.getId()), "recording");						
-					}
+//					for(Controller el: collection) {
+//						Owned.mark(Integer.toString(el.getId()), "recording");						
+//					}
 					
 					Owned.commitTransaction();
 					SuccessfulMsg.message("The record has been marked successfully");
@@ -123,19 +124,22 @@ public class DetailedResult extends JPanel{
 					
 				case "publication":
 					Owned.mark(id, category);
-					List<Controller> colexion = Publication.getListRecords(id,category);
-					
-					for(Controller el: colexion) {
-						Owned.mark(Integer.toString(el.getId()), "dance");
-					}
+//					List<Controller> colexion = Publication.getListRecords(id,category);
+//					
+//					for(Controller el: colexion) {
+//						Owned.mark(Integer.toString(el.getId()), "dance");
+//					}
 					
 					Owned.commitTransaction();
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
 					
-//				case "recording":
-//					break;
-//				case "dance":
+				case "recording":
+					Owned.mark(id,category);
+					Owned.commitTransaction();
+					break;
+
+					//				case "dance":
 //					break;
 				}
 					
@@ -348,7 +352,7 @@ private void setupTable(String tableName){
 			int row = (int) table.getModel().getValueAt(table.getSelectedRow(),0);
 			JPanel panel = new DetailedResult(Integer.toString(row),tableName);
 			add(panel);
-			System.out.println("FROM MOUSE CLicked");
+//			System.out.println("FROM MOUSE CLicked");
 		}
 
 		@Override
