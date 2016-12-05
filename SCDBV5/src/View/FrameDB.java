@@ -23,7 +23,7 @@ public class FrameDB extends JFrame{
 	 */
 	public FrameDB() {
         setTitle("PAWNT-Dance Database");
-        setSize(2000,2000);
+        setSize(1000,770);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = new JPanel();
         contentPane.setLayout(new GridLayout());
