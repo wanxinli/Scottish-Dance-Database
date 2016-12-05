@@ -1,12 +1,21 @@
 package Controller;
 
+import java.util.List;
+
 public class Publication extends Controller{
 
 	private int Year_idValue;
 	private String publishedBy;
 	private boolean onpaper;
 	private String shortName;
+	private List<Dance> dances;
 	
+	public List<Dance> getDances() {
+		return dances;
+	}
+	public void setDances(List<Dance> dances) {
+		this.dances = dances;
+	}
 	public static final String [] columns = {"id","name","published_by", "year", "marked"};
 	
 	public Publication(int id, String name, String publishedBy , int Year_id) {
