@@ -37,7 +37,7 @@ import Controller.Tune;
  */
 
 
-public class DetailedResult extends JPanel implements ActionListener{
+public class DetailedResult extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String category;
@@ -292,7 +292,7 @@ private void albumInfo(Controller album) {
 		panelIndex.setLayout(new FlowLayout());
 		panelIndex.add(textfield);
 		panelIndex.add(button);
-		button.addActionListener(this);
+		button.addActionListener(new CustomActionListener());
 		panel.add(panelIndex);
 	}
 	panel.setAlignmentY(CENTER_ALIGNMENT);
@@ -420,15 +420,16 @@ private DefaultTableModel createModel(Object[][] data, String[] columns){
     };
 }
 
+private class CustomActionListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
 	boolean f = Controller.addIndexCode(id,textfield.getText(),"album");
 	if(f){
 		for(int i=0; i<records.size(); i++){
 			f = Controller.addIndexCode(""+records.get(i).getId(),textfield.getText(),"recording");
 		}
-		if(f)
-			SuccessfulMsg.message("The index code has been saved successfully");
-		else
+		if(!f)
+			//SuccessfulMsg.message("The index code has been saved successfully");
+		//else
 			ThrowError.errorMessage("Error: stroing index");
 	}
 	else
@@ -436,5 +437,5 @@ public void actionPerformed(ActionEvent e) {
 	removeAll();
 	display();
 }
-
+}
 }

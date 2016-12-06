@@ -244,18 +244,19 @@ public abstract class Controller {
 	
 	public static String getCodeIndex(int id, String tableName){
 		Connection connection = null;
+		String indexCode  = null;
 		try {
 			connection = DriverManager.getConnection("jdbc:sqlite:markeddb.db");
 			SqlQuery query = new SqlQuery(connection,"codeTable");
 			ResultSet rs = 	query.checkIndexCode(id,tableName);
 			if(rs.next())
-				return rs.getString("indexCode");
+				indexCode = rs.getString("indexCode");
 			connection.close();
 		}
 		catch(SQLException e){
 			System.err.println(e.getMessage());
 		}
-		return null;
+		return indexCode;
 	}
 	
 	public static boolean addIndexCode(String id,String indexCode, String tableName){
