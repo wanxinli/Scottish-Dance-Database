@@ -67,13 +67,6 @@ public abstract class Controller {
 			if(results.next()){
 				controller = new Record(results.getInt("id"), results.getString("name"),results.getString("personCol"),results.getString("dancetypeCol"), 
 						results.getInt("repetitions"), results.getInt("barsperrepeat"));
-				List<Tune> tunes = new ArrayList<Tune>();
-				results = query.mappingTableJoin3Tables("recording_id", "tune_id","composer_id", "name", "tunesrecordingsmap", "tune","person", id);
-			/*	while(results.next()){
-					Tune tune= new Tune(results.getInt("id"),results.getString("name"),results.getString("personCol"));
-					tunes.add(tune);
-				}
-				((Record) controller).setTunes(tunes);*/
 			}
 			break;
 			case "publication":
@@ -189,14 +182,6 @@ public abstract class Controller {
 				while(results.next()){
 					Record controller = new Record(results.getInt("id"), results.getString("name"),results.getString("personCol"),results.getString("dancetypeCol"), 
 							results.getInt("repetitions"), results.getInt("barsperrepeat"));
-					
-					//List<Tune> tunes = new ArrayList<Tune>();
-				//	ResultSet result2 = query.mappingTableJoin3Tables("recording_id", "tune_id","composer_id", "name", "tunesrecordingsmap", "tune","person", id);
-				/*	while(result2.next()){
-						Tune tune= new Tune(result2.getInt("id"),result2.getString("name"),result2.getString("personCol"));
-						tunes.add(tune);
-					}
-					((Record) controller).setTunes(tunes);*/
 					controllers.add(controller);
 				}
 				break;
@@ -225,7 +210,6 @@ public abstract class Controller {
 	
 	
 	public static char checkMarked(int id, String tableName){
-		SqlConnection con = new SqlConnection();
 		Connection connection = null;
 		try {
 			Class.forName("org.sqlite.JDBC");
