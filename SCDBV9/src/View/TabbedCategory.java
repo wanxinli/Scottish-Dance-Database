@@ -45,7 +45,7 @@ public class TabbedCategory extends JPanel{
 	 */
 	private void display(String category, int position, int key){
 		JComponent panel = new SearchTextfield(category);
-		tabbedPane.addTab(category, null, panel, "Click to search on " + category);
+		tabbedPane.addTab(category, null, panel);
 		tabbedPane.setMnemonicAt(position, key);
 		add(tabbedPane);
     }

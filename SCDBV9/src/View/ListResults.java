@@ -194,8 +194,8 @@ public class ListResults extends JPanel{
 			data[i][1] = record.getName();
 			data[i][2] = record.getArtist();
 			data[i][3] = record.getTypeName().substring(0,1) + record.getBarsPerRepeat() + " " + record.getReps();
-			data[i][3] = Controller.getCodeIndex(record.getId(),"recording");
-			data[i][4] = Controller.checkMarked(record.getId(),category);
+			data[i][4] = Controller.getCodeIndex(record.getId(),"recording");
+			data[i][5] = Controller.checkMarked(record.getId(),category);
 		}
 		
 		model = createModel(data,Record.columns);
