@@ -231,7 +231,10 @@ public class SqlQuery
 		try{
 			statement = connection.prepareStatement("INSERT INTO mark VALUES(" + id + ",'" + tableName + "')");
 			statement.executeUpdate();
-			return true;
+			if(statement != null) {
+				  statement.close();
+				  return true;
+			 }
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
