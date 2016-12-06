@@ -132,7 +132,7 @@ public class DetailedResult extends JPanel{
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
 				}
-				
+			//	removeAll();
 				display();
 			}
 
@@ -428,13 +428,13 @@ public void actionPerformed(ActionEvent e) {
 			f = Controller.addIndexCode(""+records.get(i).getId(),textfield.getText(),"recording");
 		}
 		if(!f)
-			//SuccessfulMsg.message("The index code has been saved successfully");
+		//	SuccessfulMsg.message("The index code has been saved successfully");
 		//else
 			ThrowError.errorMessage("Error: stroing index");
 	}
 	else
 		ThrowError.errorMessage("Error: stroing index");
-	removeAll();
+//	removeAll();
 	display();
 }
 }

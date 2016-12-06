@@ -258,7 +258,10 @@ public class SqlQuery
 		try{
 			statement = connection.prepareStatement(sql);
 			statement.executeUpdate();
-			return true;
+			 if(statement != null) {
+				  statement.close();
+				  return true;
+			 }
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
