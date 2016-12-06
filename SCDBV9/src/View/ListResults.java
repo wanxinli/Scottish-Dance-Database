@@ -51,7 +51,7 @@ public class ListResults extends JPanel{
 	 * Shows the information based on the category (The clicked tab on GUI)
 	 */
 	public void display(){
-
+		removeAll();
 		switch(category){
 			case "album":
 				List<Controller> albums = Controller.searchByKey(searchKey,"album");

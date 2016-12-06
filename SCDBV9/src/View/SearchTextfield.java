@@ -78,6 +78,7 @@ public class SearchTextfield extends JPanel implements ActionListener{
 			panelSearch();
 			add(panel,BorderLayout.CENTER);
 			revalidate();			
+			repaint();
 		}
 	
 }

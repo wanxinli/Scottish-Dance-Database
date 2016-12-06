@@ -58,6 +58,7 @@ public class DetailedResult extends JPanel implements ActionListener{
 	}
 	
 	public void display(){
+		removeAll();
 		switch(category){
 			case "album":
 				Controller album = (Album) Album.searchByID(id,"album");							
@@ -131,7 +132,7 @@ public class DetailedResult extends JPanel implements ActionListener{
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
 				}
-				removeAll();
+				
 				display();
 			}
 
