@@ -24,10 +24,10 @@ public class SearchTextfield extends JPanel implements ActionListener{
 	/**
 	 * data fields
 	 */
-	 protected  JButton button;
-	 protected Label label;
-	 protected JTextField textField;
-	 protected String input;
+	 private  JButton button;
+	 private Label label;
+	 private JTextField textField;
+	 private String input;
 	 private String category;
 	 private JPanel panel= new JPanel();
 	 

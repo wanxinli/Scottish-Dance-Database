@@ -41,8 +41,8 @@ public class DetailedResult extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String category;
-	private JTextField textfield = new JTextField(30);
-	private JButton button = new JButton("submit");
+	private JTextField textfield = new JTextField(20);
+	private JButton button;
 	private JScrollPane spTable;
 	private JTable table;
 	private DefaultTableModel model;
@@ -291,6 +291,7 @@ private void albumInfo(Controller album) {
 		JPanel panelIndex= new JPanel();
 		panelIndex.setLayout(new FlowLayout());
 		panelIndex.add(textfield);
+		button = new JButton("submit");
 		panelIndex.add(button);
 		button.addActionListener(new CustomActionListener());
 		panel.add(panelIndex);
@@ -422,20 +423,22 @@ private DefaultTableModel createModel(Object[][] data, String[] columns){
 
 private class CustomActionListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
-	boolean f = Controller.addIndexCode(id,textfield.getText(),"album");
-	if(f){
-		for(int i=0; i<records.size(); i++){
-			f = Controller.addIndexCode(""+records.get(i).getId(),textfield.getText(),"recording");
+	if(button!=null){
+		boolean f = Controller.addIndexCode(id,textfield.getText(),"album");
+		if(f){
+			for(int i=0; i<records.size(); i++){
+				f = Controller.addIndexCode(""+records.get(i).getId(),textfield.getText(),"recording");
+			}
+			if(f)
+				SuccessfulMsg.message("The index code has been saved successfully");
+			else
+				ThrowError.errorMessage("Error: stroing index");
 		}
-		if(!f)
-		//	SuccessfulMsg.message("The index code has been saved successfully");
-		//else
+		else
 			ThrowError.errorMessage("Error: stroing index");
-	}
-	else
-		ThrowError.errorMessage("Error: stroing index");
+		display();
 //	removeAll();
-	display();
+	}
 }
 }
 }
