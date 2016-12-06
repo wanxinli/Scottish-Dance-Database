@@ -41,11 +41,15 @@ public class SqlQuery
 	 */
 	public ResultSet searchByName(String pk, String searchKey){
 		Statement statement;
-		
+		String sql;
+		if(pk.equals("name"))
+			sql = "SELECT * FROM " + table + " WHERE " + pk + " LIKE '%" + searchKey + "%'";
+		else
+			sql = "SELECT * FROM " + table + " WHERE " + pk + " LIKE '" + searchKey + "'";
 		try {
 			statement = connection.createStatement();
 			//statement.setQueryTimeout(30);  
-			ResultSet rs = statement.executeQuery("SELECT * FROM " + table + " WHERE " + pk + " LIKE '%" + searchKey + "%'");
+			ResultSet rs = statement.executeQuery(sql);
 			return rs;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -53,7 +57,7 @@ public class SqlQuery
 		return null;
 	}
 	
-	public ResultSet searchByID(String pk, String searchKey){
+	/*public ResultSet searchByID(String pk, String searchKey){
 		Statement statement;
 		
 		try {
@@ -66,7 +70,7 @@ public class SqlQuery
 			}
 		return null;
 	}
-	
+	*/
 	/**
 	 * 
 	 * @param PK
@@ -80,18 +84,24 @@ public class SqlQuery
 	 */
 	public ResultSet join2Tables(String PK, String table1ID, String table2ID, String table1, String table2, String searchKey){
 		Statement statement;
-		
+		String sql;
+		if(PK.equals("name"))
+			sql = "SELECT " + table1 + ".*, "  + 
+					table2 + "." + table2ID + " AS " + table2 + "Col " +
+					"FROM " + table1 + 
+					" JOIN " + table2 + " ON (" + table1 +"." + table1ID + " = " + table2 + ".id ) WHERE " + table1 + "." + PK + " LIKE '%" + searchKey + "%'";
+		else
+			sql = "SELECT " + table1 + ".*, "  + 
+					table2 + "." + table2ID + " AS " + table2 + "Col " +
+					"FROM " + table1 + " JOIN " + table2 + " ON (" + table1 +"." + table1ID + " = " + table2 + ".id ) WHERE " + table1 + "." + PK + " LIKE '" + searchKey + "'";
 		try {
 			statement = connection.createStatement();
-		//	statement.setQueryTimeout(30);  
-		/*	System.out.println("SELECT " + table1 + ".*, "  + 
+			statement.setQueryTimeout(30);  
+			sql = "SELECT " + table1 + ".*, "  + 
 					table2 + "." + table2ID + " AS " + table2 + "Col " +
-					"FROM " + table1 + " JOIN " + table2 + " ON (" + table1 +"." + table1ID + " = " + table2 + ".id ) WHERE " + table1 + "." + PK + " LIKE '%" + searchKey + "%'");
-			*/ResultSet rs = statement.executeQuery("SELECT " + table1 + ".*, "  + 
-					table2 + "." + table2ID + " AS " + table2 + "Col " +
-					"FROM " + table1 + " JOIN " + table2 + " ON (" + table1 +"." + table1ID + " = " + table2 + ".id ) WHERE " + table1 + "." + PK + " LIKE '%" + searchKey + "%'");
-			
-			
+					"FROM " + table1 + " JOIN " + table2 + " ON (" + table1 +"." + table1ID + " = " + table2 + ".id ) WHERE " + table1 + "." + PK + " LIKE '%" + searchKey + "%'";
+			System.out.println(sql);
+			ResultSet rs = statement.executeQuery(sql);
 			return rs;
 			} catch (SQLException e) {
 				e.printStackTrace();

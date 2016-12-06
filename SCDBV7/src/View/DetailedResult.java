@@ -102,13 +102,7 @@ public class DetailedResult extends JPanel{
 			cb1.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				switch(category) {
-//				
-				default:
-					Controller.mark(id,category);
-					SuccessfulMsg.message("The record has been marked successfully");
-					break;
+				switch(category) {		
 				case "album":
 					Controller.mark(id,category);
 					List<Controller> collection = Controller.getList(id,category);
@@ -125,8 +119,14 @@ public class DetailedResult extends JPanel{
 					}
 					SuccessfulMsg.message("The record has been marked successfully");
 					break;
+				default:
+					Controller.mark(id,category);
+					SuccessfulMsg.message("The record has been marked successfully");
+					break;
 				}
-								}
+				removeAll();
+				display();
+			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -189,7 +189,6 @@ public class DetailedResult extends JPanel{
 			data[i][0] = tune.getId();
 			data[i][1] = tune.getName();
 			data[i][2] = tune.getcomposer();
-			data[i][3] = Controller.checkMarked(tune.getId(),"tune");
 		}
 		model = createModel(data,Tune.columns);
 		
@@ -290,7 +289,7 @@ private void albumInfo(Controller album) {
 		if(Controller.checkMarked(dance.getId(), category)=='*')
 			flag = true;
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(5, 2));
+		panel.setLayout(new GridLayout(6, 2));
 		panel.add(new JLabel("Type"));
 		panel.add(new JLabel(dance.getType()));
 		panel.add(new JLabel("Shape"));
@@ -300,30 +299,28 @@ private void albumInfo(Controller album) {
 		panel.add(new JLabel("Bars/Repeat"));
 		panel.add(new JLabel("" + dance.getBarsperrepeat()));
 		panel.add(new JLabel("Published in"));
-		panel.add(new JLabel("" + pub.getName()));
+		if(pub!=null)
+			panel.add(new JLabel("" + pub.getName()));
+		else
+			panel.add(new JLabel("Unknown"));
+		
+		panel.add(new JLabel("Fomrations: "));
+		List<Formation> formations = dance.getFormations();
+		if(formations == null)
+			panel.add(new JLabel("Unknown"));
+		else{
+			JPanel panelFomration = new JPanel();
+			panelFomration.setLayout(new GridLayout(formations.size(),0));
+			for(int i=0; i<formations.size(); i++){
+				panelFomration.add(new JLabel(formations.get(i).getName()));
+			}
+			panel.add(panelFomration);
+		}
 		panel.setAlignmentX(CENTER_ALIGNMENT);
 		panel.setAlignmentY(CENTER_ALIGNMENT);
 		add(panel);
-
-		List<Formation> formations = dance.getFormations();
-		formationTable(formations);
-		setupTable("formation");
-		spTable.setAlignmentX(CENTER_ALIGNMENT);
-		spTable.setAlignmentY(LEFT_ALIGNMENT);
-		add(spTable);
 	}
 
-	private void formationTable(List<Formation> formations) {
-		Object[][] data = new Object[formations.size()][Formation.columns.length];
-		for (int i = 0; i < formations.size(); i++) {
-			Formation formation = formations.get(i);
-			data[i][0] = formation.getId();
-			data[i][1] = formation.getName();
-		}
-		model = createModel(data, Formation.columns);
-
-	}
-	//
 private void setupTable(String tableName){
 	table = new JTable(model);
 	spTable = new JScrollPane(table);

@@ -2,7 +2,7 @@ package Controller;
 
 public class Tune extends Controller{
 	private String composer;
-	public static final String [] columns = {"id","name", "composer", "marked"};
+	public static final String [] columns = {"id","Name", "Composer"};
 
 	
 	public String getcomposer() {

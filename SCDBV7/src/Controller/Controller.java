@@ -48,11 +48,11 @@ public abstract class Controller {
 						formations.add(formation);
 					}
 					((Dance) controller).setFormations(formations);
-
-					results = query.join2Tables("dance_id", "publication_id", "name", "dancespublicationsmap",
-							"publication", id);
-					Publication publication = new Publication(results.getInt("id"), results.getString("publicationCol"));
-					((Dance) controller).setPublication(publication);
+					results = query.join2Tables("dance_id", "publication_id", "name", "dancespublicationsmap","publication", id);
+					if(results.next()){
+						Publication publication = new Publication(results.getInt("id"), results.getString("publicationCol"));
+						((Dance) controller).setPublication(publication);
+					}
 				}
 				break;
 		 //
@@ -208,7 +208,7 @@ public abstract class Controller {
 					}
 				break;
 			case "publication":
-				results = query.searchByID("publication_id", id);
+				results = query.searchByName("publication_id", id);
 				while(results.next()){
 					Dance dance= new Dance(results.getInt("id"));//,results.getString("name"),results.getString("personCol"));
 					controllers.add(dance);
