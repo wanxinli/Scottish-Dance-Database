@@ -43,11 +43,12 @@ public class DetailedResult extends JPanel implements ActionListener{
 	private String category;
 	private JTextField textfield = new JTextField(30);
 	private JButton button = new JButton("submit");
-	JScrollPane spTable;
-	JTable table;
+	private JScrollPane spTable;
+	private JTable table;
 	private DefaultTableModel model;
 	private boolean flag = false;
-	List<Controller> records;
+	private List<Controller> records;
+	
 	public DetailedResult(String id, String category) {
 		super();
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));

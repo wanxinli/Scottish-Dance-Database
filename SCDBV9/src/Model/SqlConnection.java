@@ -21,11 +21,11 @@ import java.sql.Connection;
 		 * Constructor
 		 */
 		public SqlConnection(){
-			try {
+			/*try {
 				Class.forName("org.sqlite.JDBC");
 			} catch (ClassNotFoundException e1) {
 				e1.printStackTrace();
-			}
+			}*/
 			try
 			{
 				// create a database connection

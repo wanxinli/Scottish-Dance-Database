@@ -66,6 +66,7 @@ public class SearchTextfield extends JPanel implements ActionListener{
 	 @Override
 		public void actionPerformed(ActionEvent e) {
 			input = textField.getText();
+			removeAll();
 			panel.removeAll();
 			if(input == null || input.isEmpty()){
 				ThrowError.errorMessage("Enter a search Key on the input box to search on " + category + " data");
@@ -74,6 +75,7 @@ public class SearchTextfield extends JPanel implements ActionListener{
 				ListResults resultList = new ListResults(category,input);
 				panel.add(resultList);
 			}
+			panelSearch();
 			add(panel,BorderLayout.CENTER);
 			revalidate();			
 		}

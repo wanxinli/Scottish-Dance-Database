@@ -42,6 +42,8 @@ public class SqlQuery
 	public ResultSet searchByName(String pk, String searchKey){
 		Statement statement;
 		String sql;
+		searchKey = fixSpecialCharacters(searchKey);
+			
 		if(pk.equals("name"))
 			sql = "SELECT * FROM " + table + " WHERE " + pk + " LIKE '%" + searchKey + "%'";
 		else
@@ -56,7 +58,10 @@ public class SqlQuery
 			}
 		return null;
 	}
-	
+	private String fixSpecialCharacters(String searchKey){
+		String str = searchKey.replaceAll("\\W", "");
+		return str;
+	}
 	/**
 	 * 
 	 * @param PK
@@ -116,6 +121,7 @@ public class SqlQuery
 	public ResultSet join4Tables(String PK, String table1ID1, String table1ID2, String table1ID3, String table2ID, String table3ID, String table4ID, String table1, String table2, String table3, String table4, String searchKey){
 		Statement statement;
 		String sql;
+		searchKey = fixSpecialCharacters(searchKey);
 		if(PK.equals("name"))
 			sql = "SELECT " + table1 + ".*, " + 
 				table2 + "." + table2ID + " AS " + table2 + "Col, " +
@@ -138,8 +144,6 @@ public class SqlQuery
 					"WHERE " + table1 + "." + PK + " LIKE '" + searchKey + "'";
 		try {
 			statement = connection.createStatement();
-	//		statement.setQueryTimeout(30);  
-		//	System.out.println(sql);
 			ResultSet rs = statement.executeQuery(sql);
 			return rs;
 			} catch (SQLException e) {
@@ -150,17 +154,9 @@ public class SqlQuery
 	
 	public ResultSet join3Tables(String PK, String table1ID1, String table2ID, String table1ID2, String table3ID, String table1, String table2, String table3, String searchKey){
 		Statement statement;
-		
+		searchKey = fixSpecialCharacters(searchKey);
 		try {
 			statement = connection.createStatement();
-//			statement.setQueryTimeout(30);  
-			/*System.out.println("SELECT " + table1 + ".*, " + 
-					table2 + "." + table2ID + " AS " + table2 + "Col, " +
-					table3 + "." + table3ID + " AS " + table3 + "Col " +
-					"FROM " + table1 + 
-					" JOIN " +table2 + " ON (" + table1 +"." + table1ID1 + " = " + table2 + ".id ) " +
-					"JOIN  " + table3 + " ON (" + table1 +"." + table1ID2 + " = " + table3 + ".id ) " +
-					"WHERE " + table1 + "." + PK + " LIKE '%" + searchKey + "%'");*/
 			ResultSet rs = statement.executeQuery("SELECT " + table1 + ".*, " + 
 					table2 + "." + table2ID + " AS " + table2 + "Col, " +
 					table3 + "." + table3ID + " AS " + table3 + "Col " +
@@ -180,13 +176,6 @@ public class SqlQuery
 		
 		try {
 			statement = connection.createStatement();
-		//	statement.setQueryTimeout(30);  
-			/*System.out.println("SELECT " + table1 + "." + table1ID2 + ", "  + 
-					table2 + ".*, " +
-					table3 + "." + table3ID + " AS " + table3 + "Col " +
-					"FROM " + table1 + " JOIN " + table2 + " ON (" + table1 +"." + table1ID2 + " = " + table2 + ".id ) " + 
-					"JOIN  " + table3 + " ON (" + table2 +"." + table2ID + " = " + table3 + ".id ) " +
-					"WHERE " + table1 + "." + table1ID1 + " LIKE '%" + searchKey + "%'");*/
 			ResultSet rs = statement.executeQuery("SELECT " + table1 + "." + table1ID2 + ", "  + 
 					table2 + ".*, " +
 					table3 + "." + table3ID + " AS " + table3 + "Col " +
@@ -205,15 +194,6 @@ public class SqlQuery
 		
 		try {
 			statement = connection.createStatement();
-	//		statement.setQueryTimeout(30);  
-		/*	System.out.println("SELECT " + table1 + "." + table1ID2 + ", "  + 
-					table2 + ".*, " +
-					table3 + "." + table3Col + " AS " + table3 + "Col, " +
-					table4 + "." + table4Col + " AS " + table4 + "Col " +
-					"FROM " + table1 + " JOIN " + table2 + " ON (" + table1 +"." + table1ID2 + " = " + table2 + ".id ) " + 
-					"JOIN  " + table3 + " ON (" + table2 +"." + table2ID1 + " = " + table3 + ".id ) " +
-					"JOIN  " + table4 + " ON (" + table2 +"." + table2ID2 + " = " + table4 + ".id ) " +
-					"WHERE " + table1 + "." + table1ID1 + " LIKE '" + searchKey + "'");*/
 			ResultSet rs = statement.executeQuery("SELECT " + table1 + "." + table1ID2 + ", "  + 
 					table2 + ".*, " +
 					table3 + "." + table3Col + " AS " + table3 + "Col, " +
@@ -233,9 +213,6 @@ public class SqlQuery
 		Statement statement;
 		try{
 			statement = connection.createStatement();
-	//		statement.setQueryTimeout(30); 
-		/*	System.out.println("SELECT * from mark " +
-					"WHERE id =" + id + " AND tableName like '" + tableName + "'");*/
 			ResultSet rs = statement.executeQuery("SELECT * from mark " +
 					"WHERE id =" + id + " AND tableName like '" + tableName + "'");
 			return rs;
@@ -250,8 +227,6 @@ public class SqlQuery
 		try{
 			statement = connection.prepareStatement("INSERT INTO mark VALUES(" + id + ",'" + tableName + "')");
 			statement.executeUpdate();
-		//	System.out.println("INSERT INTO mark VALUES(" + id + ",'" + tableName + "')");
-		//	ResultSet rs = statement.executeQuery();
 			return true;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -265,7 +240,6 @@ public class SqlQuery
 			statement = connection.createStatement();
 			String sql = "SELECT * from codeTable " +
 					"WHERE id =" + id + " AND tableName like '" + tableName + "'";
-		//	System.out.println(sql);
 			ResultSet rs = statement.executeQuery(sql);
 			return rs;
 		}catch (SQLException e) {

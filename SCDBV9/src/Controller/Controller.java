@@ -182,14 +182,6 @@ public abstract class Controller {
 				while(results.next()){
 					Record controller = new Record(results.getInt("id"), results.getString("name"),results.getString("personCol"),results.getString("dancetypeCol"), 
 							results.getInt("repetitions"), results.getInt("barsperrepeat"));
-					
-					//List<Tune> tunes = new ArrayList<Tune>();
-				//	ResultSet result2 = query.mappingTableJoin3Tables("recording_id", "tune_id","composer_id", "name", "tunesrecordingsmap", "tune","person", id);
-				/*	while(result2.next()){
-						Tune tune= new Tune(result2.getInt("id"),result2.getString("name"),result2.getString("personCol"));
-						tunes.add(tune);
-					}
-					((Record) controller).setTunes(tunes);*/
 					controllers.add(controller);
 				}
 				break;
@@ -220,7 +212,6 @@ public abstract class Controller {
 	public static char checkMarked(int id, String tableName){
 		Connection connection = null;
 		try {
-			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:markeddb.db");
 			SqlQuery query = new SqlQuery(connection,tableName);
 			ResultSet results = query.checkmark(id,tableName);
@@ -229,8 +220,6 @@ public abstract class Controller {
 				return '*';
 			}
 			connection.close();
-		}catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
 		}
 		catch(SQLException e){
 			System.err.println(e.getMessage());
@@ -241,14 +230,11 @@ public abstract class Controller {
 	public static boolean mark(String id, String tableName){
 		Connection connection = null;
 		try {
-			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:markeddb.db");
 			SqlQuery query = new SqlQuery(connection,tableName);
 			boolean flag = 	query.mark(Integer.parseInt(id),tableName);
 			connection.close();
 			return flag; 
-		}catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
 		}
 		catch(SQLException e){
 			System.err.println(e.getMessage());
@@ -259,15 +245,12 @@ public abstract class Controller {
 	public static String getCodeIndex(int id, String tableName){
 		Connection connection = null;
 		try {
-			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:markeddb.db");
 			SqlQuery query = new SqlQuery(connection,"codeTable");
 			ResultSet rs = 	query.checkIndexCode(id,tableName);
 			if(rs.next())
 				return rs.getString("indexCode");
 			connection.close();
-		}catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
 		}
 		catch(SQLException e){
 			System.err.println(e.getMessage());
@@ -278,14 +261,11 @@ public abstract class Controller {
 	public static boolean addIndexCode(String id,String indexCode, String tableName){
 		Connection connection = null;
 		try {
-			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:markeddb.db");
 			SqlQuery query = new SqlQuery(connection,"codeTable");
 			boolean flag = 	query.indexCodeUpdate(Integer.parseInt(id),indexCode,tableName);
 			connection.close();
 			return flag; 
-		}catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
 		}
 		catch(SQLException e){
 			System.err.println(e.getMessage());
