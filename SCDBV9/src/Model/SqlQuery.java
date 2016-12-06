@@ -59,8 +59,12 @@ public class SqlQuery
 		return null;
 	}
 	private String fixSpecialCharacters(String searchKey){
-		String str = searchKey.replaceAll("\\W", "");
-		return str;
+		if(searchKey.contains("'")){
+			int index = searchKey.indexOf("'");
+			System.out.println(index);
+			return searchKey.substring(0,index);
+		}
+		return searchKey;
 	}
 	/**
 	 * 
