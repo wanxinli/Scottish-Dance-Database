@@ -160,7 +160,7 @@ public class ListResults extends JPanel{
 	}
 	
 	/**
-	 * 
+	 * @author Wanxin
 	 * @param dances
 	 * uses the controller Dance class to get the information from database
 	 */
